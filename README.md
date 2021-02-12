@@ -16,7 +16,7 @@ the term.
 - Shows upcoming assignments 
 - Check off assignments when they are completed 
 
-##*User Stories* ##
+##User Stories ##
 - As a user, I want to be able to add multiple courses to my planner
 - As a user, I want to be able to input specific dates for midterms and projects within each respective course
 - As a user, I want to be able to see what deadlines are coming up within the x amount of days 
