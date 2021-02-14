@@ -2,7 +2,6 @@ package model;
 
 import org.junit.Before;
 import org.junit.Test;
-import ui.CoursePlanner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,14 +35,13 @@ public class CoursePlannerTest {
         c2.addTask(t2);
         c3.addTask(t3);
 
-        cp.addCourse(c1);
-        cp.addCourse(c2);
-        cp.addCourse(c3);
-
     }
 
     @Test
     public void testAddCourse() {
+        cp.addCourse(c1);
+        cp.addCourse(c2);
+        cp.addCourse(c3);
 
         List actual = new ArrayList();
         actual.add(c1.getCourseName());

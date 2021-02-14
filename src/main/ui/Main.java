@@ -1,10 +1,10 @@
 package ui;
 
-import model.Course;
-import model.Date;
-import model.Task;
+import model.CoursePlanner;
 
 public class Main {
 
-    public static void main(String[] args) { }
+    public static void main(String[] args) {
+        new CoursePlannerApp();
+    }
 }

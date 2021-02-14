@@ -1,4 +1,4 @@
-package ui;
+package model;
 
 import model.Course;
 import model.Task;
@@ -26,7 +26,6 @@ public class CoursePlanner {
         for (Course c : courses) {
             courseNames.add(c.getCourseName());
         }
-
         return courseNames;
     }
 
