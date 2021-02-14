@@ -22,8 +22,8 @@ public class Course {
 
     //REQUIRES: list of tasks > 0
     //EFFECTS: returns a list of tasks names (string) assigned to that course
-    public List getTaskNames() {
-        List taskList = new ArrayList();
+    public List<String> getTaskNames() {
+        List<String> taskList = new ArrayList<>();
         for (Task t : tasks) {
             taskList.add(t.getTaskName());
         }

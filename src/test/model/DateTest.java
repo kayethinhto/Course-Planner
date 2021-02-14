@@ -1,15 +1,19 @@
 package model;
 
-import org.junit.Before;
-import org.junit.Test;
+
+//import org.junit.Test;
+//import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
 public class DateTest {
     private Date date;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         date = new Date(2021, 02, 14, 12, 45);
     }

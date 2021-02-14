@@ -1,14 +1,18 @@
 package model;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+
+//import org.junit.Test;
+//import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TasksTest {
     private Task task;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         task = new Task("Midterm", new Date(2021, 02, 24, 07, 30), 20);
     }

@@ -1,7 +1,12 @@
 package model;
 
-import org.junit.Before;
-import org.junit.Test;
+
+//import org.junit.Test;
+//import org.junit.jupiter.api.BeforeEach;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +23,7 @@ public class CoursePlannerTest {
     private Task t2;
     private Task t3;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.cp = new CoursePlanner();
 
