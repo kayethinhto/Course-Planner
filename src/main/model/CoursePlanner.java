@@ -11,7 +11,7 @@ public class CoursePlanner {
 
     //Constructor
     public CoursePlanner() {
-        courses = new ArrayList<>();
+        courses = new ArrayList<Course>();
     }
 
     //EFFECTS: adds a new course to the course planner
@@ -22,7 +22,7 @@ public class CoursePlanner {
     //REQUIRES: list of courses > 0
     //EFFECTS: returns a list of all the course names in the course planner
     public List<String> getCourses() {
-        List courseNames = new ArrayList();
+        List<String> courseNames = new ArrayList();
         for (Course c : courses) {
             courseNames.add(c.getCourseName());
         }
