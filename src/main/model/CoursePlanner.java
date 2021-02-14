@@ -21,12 +21,22 @@ public class CoursePlanner {
 
     //REQUIRES: list of courses > 0
     //EFFECTS: returns a list of all the course names in the course planner
-    public List getCourses() {
+    public List<String> getCourses() {
         List courseNames = new ArrayList();
         for (Course c : courses) {
             courseNames.add(c.getCourseName());
         }
         return courseNames;
+    }
+
+    //EFFECTS: returns a course
+    public Course getCourseObj(String name) {
+        for (Course c : courses) {
+            if (c.getCourseName().equals(name)) {
+                return c;
+            }
+        }
+        return null;
     }
 
 }

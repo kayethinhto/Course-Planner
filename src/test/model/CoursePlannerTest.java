@@ -35,13 +35,14 @@ public class CoursePlannerTest {
         c2.addTask(t2);
         c3.addTask(t3);
 
+        cp.addCourse(c1);
+        cp.addCourse(c2);
+        cp.addCourse(c3);
+
     }
 
     @Test
     public void testAddCourse() {
-        cp.addCourse(c1);
-        cp.addCourse(c2);
-        cp.addCourse(c3);
 
         List actual = new ArrayList();
         actual.add(c1.getCourseName());
@@ -49,6 +50,11 @@ public class CoursePlannerTest {
         actual.add(c3.getCourseName());
 
         assertEquals(actual, cp.getCourses());
+    }
+
+    @Test
+    public void testGetCourseObj() {
+        assertEquals(c1, cp.getCourseObj("CPSC 210"));
     }
 
 }

@@ -42,7 +42,14 @@ public class Course {
         tasks.remove(t);
     }
 
-
+    public Task getTaskObj(String name) {
+        for (Task t : tasks) {
+            if (t.getTaskName().equals(name)) {
+                return t;
+            }
+        }
+        return null;
+    }
 
 
 }
