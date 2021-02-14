@@ -63,4 +63,9 @@ public class CoursePlannerTest {
         assertEquals(c1, cp.getCourseObj("CPSC 210"));
     }
 
+    @Test
+    public void testGetCourseObjNull() {
+        assertEquals(null, cp.getCourseObj("STAT 200"));
+    }
+
 }

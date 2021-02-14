@@ -13,13 +13,11 @@ public class CoursePlannerApp {
     private Scanner input;
     private boolean keepRunning;
 
-    private static final String ADD_COURSE_COMMAND = "add course";
-    private static final String VIEW_COURSES = "view courses";
-    private static final String ADD_TASK_COMMAND_EXISTING = "add task";
-    private static final String VIEW_TASKS_IN_COURSE = "view task";
-    private static final String REMOVE_TASK_COMMAND = "remove";
-    private static final String GET_TASK_INFO = "get info";
-    private static final String QUIT_COMMAND = "quit";
+    private static final String addCourseCommand = "add course";
+    private static final String addTaskCommandExisting = "add task";
+    private static final String removeTaskCommand = "remove";
+    private static final String getTaskInfo = "get info";
+    private static final String quitCommand = "quit";
 
 
     public CoursePlannerApp() {
@@ -48,23 +46,23 @@ public class CoursePlannerApp {
     private void parseInput(String str) {
         if (str.length() > 0) {
             switch (str) {
-                case ADD_COURSE_COMMAND:
+                case addCourseCommand:
                     addNewCourse();
                     break;
 
-                case REMOVE_TASK_COMMAND:
+                case removeTaskCommand:
                     removeTask();
                     break;
 
-                case ADD_TASK_COMMAND_EXISTING:
+                case addTaskCommandExisting:
                     addTaskExisting();
                     break;
 
-                case GET_TASK_INFO:
+                case getTaskInfo:
                     getTaskInfo();
                     break;
 
-                case QUIT_COMMAND:
+                case quitCommand:
                     keepRunning = false;
                     break;
 
@@ -76,13 +74,11 @@ public class CoursePlannerApp {
     }
 
     private void printInstructions() {
-        System.out.println("\nEnter '" + ADD_COURSE_COMMAND + "' to add a course to your planner");
-        System.out.println("Enter '" + ADD_TASK_COMMAND_EXISTING + "' to add a task to a course");
-   //   System.out.println("Enter '" + VIEW_TASKS_IN_COURSE + "' to view all tasks in a course");
-        System.out.println("Enter '" + REMOVE_TASK_COMMAND + "' to remove a task in a course");
-   //   System.out.println("Enter '" + VIEW_COURSES + "' to view all courses in your planner");
-        System.out.println("Enter '" + GET_TASK_INFO + "' to view a specific task");
-        System.out.println("\nTo quit, enter '" + QUIT_COMMAND + "' ");
+        System.out.println("\nEnter '" + addCourseCommand + "' to add a course to your planner");
+        System.out.println("Enter '" + addTaskCommandExisting + "' to add a task to a course");
+        System.out.println("Enter '" + removeTaskCommand + "' to remove a task in a course");
+        System.out.println("Enter '" + getTaskInfo + "' to view a specific task");
+        System.out.println("\nTo quit, enter '" + quitCommand + "' ");
     }
 
     private void addNewCourse() {
@@ -91,12 +87,11 @@ public class CoursePlannerApp {
 
         if (!cp.getCourses().contains(courseName)) {
 
-            // System.out.println(courseName);
+
             Course thisCourse = new Course(courseName);
 
             cp.addCourse(thisCourse);
 
-            // cp.addCourse(new Course(courseName));
             System.out.println("Current Courses: " + cp.getCourses());
 
         } else {
@@ -121,7 +116,8 @@ public class CoursePlannerApp {
                 Task thisTask = new Task(taskName, addTaskDate(), taskWeight);
 
                 cp.getCourseObj(thisCourse).addTask(thisTask);
-                System.out.println("Current Tasks in " + thisCourse + ": " + cp.getCourseObj(thisCourse).getTaskNames());
+                System.out.println("Current Tasks in " + thisCourse + ": "
+                        + cp.getCourseObj(thisCourse).getTaskNames());
             } else {
                 System.out.println("This task already exists, try a new name");
             }

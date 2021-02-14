@@ -74,4 +74,21 @@ public class CourseTest {
         assertEquals(actual, c1.getTaskNames());
     }
 
+    @Test
+    public void testGetCourseName() {
+        assertEquals("CPSC 210", c1.getCourseName());
+    }
+
+    @Test
+    public void testGetTaskObjNull() {
+        assertEquals(null, c1.getTaskObj("STAT 200"));
+    }
+
+    @Test
+    public void testGetTaskObj() {
+
+        assertEquals(t1, c1.getTaskObj("Midterm"));
+    }
+
+
 }
