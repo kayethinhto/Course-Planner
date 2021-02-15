@@ -48,21 +48,4 @@ public class Task {
         return date.getDay();
     }
 
-    public Boolean getCompletedStatus() {
-        return status;
-    }
-
-    //EFFECTS: marks a task as completed by changing boolean value to true
-    //MODIFIES: changed isComplete to True
-    public void completeTask() {
-        status = true;
-    }
-
-    //EFFECTS: returns the value of isComplete (true for completed, false for incomplete)
-    public Boolean isTaskComplete() {
-        return status;
-    }
-
-
-
 }

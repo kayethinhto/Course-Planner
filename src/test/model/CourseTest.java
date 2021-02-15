@@ -86,7 +86,6 @@ public class CourseTest {
 
     @Test
     public void testGetTaskObj() {
-
         assertEquals(t1, c1.getTaskObj("Midterm"));
     }
 

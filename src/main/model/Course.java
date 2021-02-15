@@ -15,6 +15,7 @@ public class Course {
         tasks = new ArrayList<>();
     }
 
+    //MODIFIES: this
     //EFFECTS: adds a new task to the course
     public void addTask(Task t) {
         tasks.add(t);
@@ -30,18 +31,18 @@ public class Course {
         return taskList;
     }
 
-    //Getter
     //EFFECTS: returns the course name
     public String getCourseName() {
         return courseName;
     }
 
-    //MODIFIES: deletes a Task from the tasks list
-    //EFFECTS: removes a given task
+    //MODIFIES: this
+    //EFFECTS: removes a given task from the task list
     public void removeTask(Task t) {
         tasks.remove(t);
     }
 
+    //EFFECTS: returns the task object corresponding to it's name
     public Task getTaskObj(String name) {
         for (Task t : tasks) {
             if (t.getTaskName().equals(name)) {
@@ -50,6 +51,5 @@ public class Course {
         }
         return null;
     }
-
 
 }

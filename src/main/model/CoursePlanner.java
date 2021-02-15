@@ -14,7 +14,8 @@ public class CoursePlanner {
         courses = new ArrayList<Course>();
     }
 
-    //EFFECTS: adds a new course to the course planner
+    //MODIFIES: this
+    //EFFECTS: adds a new course object to the course planner
     public void addCourse(Course c) {
         courses.add(c);
     }

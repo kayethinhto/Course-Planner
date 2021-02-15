@@ -37,21 +37,6 @@ public class TasksTest {
         assertEquals("07 : 30", task.getTaskTime());
     }
 
-    @Test
-    public void testCompleteTask() {
-        assertFalse(task.getCompletedStatus());
-        task.completeTask();
-        assertTrue(task.getCompletedStatus());
-
-    }
-
-    @Test
-    public void testIsTaskComplete() {
-        assertEquals(false, task.isTaskComplete());
-        task.completeTask();
-        assertEquals(true, task.isTaskComplete());
-    }
-
 
 
 
