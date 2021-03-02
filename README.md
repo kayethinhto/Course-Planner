@@ -22,3 +22,5 @@ the term.
 - As a user, I want to be able to input specific dates for midterms and projects within each respective course
 - As a user, I want to be able to remove specific assignments  
 - As a user, I want to be able to retrieve specific information for each task
+- As a user, I want to be able to save my course planner file 
+- As a user, I want to be able to load an existing course planner from file

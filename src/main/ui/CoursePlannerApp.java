@@ -7,6 +7,7 @@ import model.Task;
 
 import java.util.Scanner;
 
+//Represents the the ui for the Course Planner App
 public class CoursePlannerApp {
 
     private CoursePlanner cp;
@@ -19,7 +20,8 @@ public class CoursePlannerApp {
     private static final String getTaskInfo = "get info";
     private static final String quitCommand = "quit";
 
-
+    //EFFECTS: 
+    //Constructor
     public CoursePlannerApp() {
         cp = new CoursePlanner();
         input = new Scanner(System.in);
@@ -43,6 +45,8 @@ public class CoursePlannerApp {
         System.out.println("Thanks for using the course planner!");
     }
 
+    //EFFECTS: executes a given method based on a command given by the user. Prints
+    //          "Try another command" if user input is invalid.
     private void parseInput(String str) {
         if (str.length() > 0) {
             switch (str) {
@@ -73,6 +77,7 @@ public class CoursePlannerApp {
         }
     }
 
+    //EFFECTS: displays starting menu with available comands
     private void printInstructions() {
         System.out.println("\nEnter '" + addCourseCommand + "' to add a course to your planner");
         System.out.println("Enter '" + addTaskCommandExisting + "' to add a task to a course");
@@ -81,6 +86,8 @@ public class CoursePlannerApp {
         System.out.println("\nTo quit, enter '" + quitCommand + "' ");
     }
 
+    //MODIFIES: this
+    //EFFECTS: Creates a new course object and assigns user input as the name of said course
     private void addNewCourse() {
         System.out.println("Enter Course Code");
         String courseName = input.next();
@@ -100,6 +107,10 @@ public class CoursePlannerApp {
         printInstructions();
     }
 
+    //MODIFIES: this
+    //REQUIRES: courses is not null
+    //EFFECTS: Creates a new task, assigns user input as the name of the task and adds this task to the task list
+    //         in a given course (also specified by the user). Course specified by user needs to exist.
     private void addTaskExisting() {
         System.out.println("What course would you like to add a task to? (choose from: " + cp.getCourses() + ")");
         String thisCourse = input.next();
@@ -128,30 +139,37 @@ public class CoursePlannerApp {
     }
 
     private Date addTaskDate() {
-        System.out.println("What year is this due? (yyyy/mm/dd)");
+        System.out.println("What year is this due? (____/mm/dd)");
         int taskDateYear = input.nextInt();
 
-        System.out.println("What month is this due? (yyyy/mm/dd)");
+        System.out.println("What month is this due? (yyyy/__/dd)");
         int taskDateMonth = input.nextInt();
 
-        System.out.println("What day is this due? (yyyy/mm/dd)");
+        System.out.println("What day is this due? (yyyy/mm/__)");
         int taskDateDay = input.nextInt();
 
-        System.out.println("What time (hour) is this due? (hh:mm)");
+        System.out.println("What time (hour) is this due? (__:mm)");
         int taskDateHour = input.nextInt();
 
-        System.out.println("What time (minute) is this due? (hh:mm)");
+        System.out.println("What time (minute) is this due? (hh:__)");
         int taskDateMin = input.nextInt();
 
         Date thisDate = new Date(taskDateYear, taskDateMonth, taskDateDay, taskDateHour, taskDateMin);
         return thisDate;
     }
 
+    //EFFECTS: returns true if user inputs a course that is in the system
+    private boolean getTask(String course) {
+        return (!(cp.getCourses().isEmpty()) && cp.getCourses().contains(course));
+    }
+
+    //MODIFIES: this
+    //EFFECTS: removes a task specified by the user. The course and the task being removed must exist
     private void removeTask() {
         System.out.println("What course's tasks would you like to remove? (choose from: " + cp.getCourses() + ")");
         String course = input.next();
 
-        if (!(cp.getCourses().isEmpty()) && cp.getCourses().contains(course)) {
+        if (getTask(course)) {
             System.out.println("Enter the task you want to remove (choose from: "
                     + cp.getCourseObj(course).getTaskNames() + ")");
 
@@ -160,16 +178,20 @@ public class CoursePlannerApp {
             Task t = cp.getCourseObj(course).getTaskObj(task);
             cp.getCourseObj(course).removeTask(t);
 
-            if (!(cp.getCourseObj(course).getTaskNames().contains(task))) {
-                System.out.println("Task deleted successfully!");
-                System.out.println("Your task list now: " + cp.getCourseObj(course).getTaskNames());
-            }
+            System.out.println("Your task list now: " + cp.getCourseObj(course).getTaskNames());
+
         } else {
             System.out.println("This course or task does not exist");
         }
         printInstructions();
     }
 
+    //EFFECTS: return true if the course specified contains a given task (also specified by the user)
+    public boolean checkCourseContainsTask(String course, String task) {
+        return (cp.getCourseObj(course).getTaskNames().contains(task) && cp.getCourses().contains(course));
+    }
+
+    //EFFECTS: returns task-specific information specified by the user
     private void getTaskInfo() {
         System.out.println("What course's tasks would you like to look at? (choose from: " + cp.getCourses() + ")");
         String course = input.next();
@@ -177,13 +199,16 @@ public class CoursePlannerApp {
         System.out.println("What task would you like to look at? (choose from: "
                 + cp.getCourseObj(course).getTaskNames() + ")");
         String task = input.next();
-
-        if (cp.getCourseObj(course).getTaskNames().contains(task) && cp.getCourses().contains(course)) {
+        //add to model package
+        if (checkCourseContainsTask(course, task)) {
+            //
             String date = cp.getCourseObj(course).getTaskObj(task).getTaskDueDate();
             String time = cp.getCourseObj(course).getTaskObj(task).getTaskTime();
 
             String taskName = cp.getCourseObj(course).getTaskObj(task).getTaskName();
             int taskWeight = cp.getCourseObj(course).getTaskObj(task).getTaskGradeWeight();
+
+            //move to model package
 
             System.out.println("Assignment Type: " + taskName);
             System.out.println("Assignment weighting: " + taskWeight + "%");
