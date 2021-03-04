@@ -14,7 +14,8 @@ public class TasksTest {
 
     @BeforeEach
     public void setUp() {
-        task = new Task("Midterm", new Date(2021, 02, 24, 07, 30), 20);
+        task = new Task("Midterm",
+                new Date(2021, 02, 24), 20);
     }
 
     @Test
@@ -32,10 +33,6 @@ public class TasksTest {
         assertEquals("2021 / 02 / 24", task.getTaskDueDate());
     }
 
-    @Test
-    public void testGetTaskTime() {
-        assertEquals("07 : 30", task.getTaskTime());
-    }
 
 
 

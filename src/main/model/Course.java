@@ -1,11 +1,17 @@
 package model;
 
+import com.sun.corba.se.spi.ior.Writeable;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.omg.CORBA_2_3.portable.OutputStream;
+import persistance.Writable;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 //represents a course in the course planner, each course can have specific assignments
-public class Course {
+public class Course implements Writable {
     private String courseName;
     private List<Task> tasks;
 
@@ -17,8 +23,10 @@ public class Course {
 
     //MODIFIES: this
     //EFFECTS: adds a new task to the course
-    public void addTask(Task t) {
-        tasks.add(t);
+    public void addTask(String taskName, Date date, int taskWeight) { //parameter should be a string
+
+        Task thisTask = new Task(taskName, date, taskWeight);
+        tasks.add(thisTask);
     }
 
     //REQUIRES: list of tasks > 0
@@ -51,5 +59,22 @@ public class Course {
         }
         return null;
     }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("course", courseName);
+        json.put("tasks", tasksToJson());
+        return json;
+    }
+
+    private JSONArray tasksToJson() {
+        JSONArray jsonArray = new JSONArray();
+        for (Task task : tasks) {
+            jsonArray.put(task.toJson());
+        }
+        return jsonArray;
+    }
+
 
 }

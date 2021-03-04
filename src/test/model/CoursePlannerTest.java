@@ -20,9 +20,6 @@ public class CoursePlannerTest {
     private Course c1;
     private Course c2;
     private Course c3;
-    private Task t1;
-    private Task t2;
-    private Task t3;
 
     @BeforeEach
     public void setUp() {
@@ -32,14 +29,9 @@ public class CoursePlannerTest {
         this.c2 = new Course("CPSC 110");
         this.c3 = new Course("CPSC 121");
 
-        this.t1 = new Task("Midterm", new Date(2021, 02, 24, 07, 30), 20);
-        this.t2 = new Task("Assignment1", new Date(2021, 03, 24, 07, 30),
-                10);
-        this.t3 = new Task("Exam", new Date(2021, 03, 24, 07, 30), 40);
-
-        c1.addTask(t1);
-        c2.addTask(t2);
-        c3.addTask(t3);
+        c1.addTask("Midterm", new Date(2021, 02, 24), 20);
+        c2.addTask("Assignment1", new Date(2021, 03, 24), 15);
+        c3.addTask("Exam", new Date(2021, 03, 24), 40);
 
         cp.addCourse(c1);
         cp.addCourse(c2);

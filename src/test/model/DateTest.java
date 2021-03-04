@@ -16,7 +16,7 @@ public class DateTest {
 
     @BeforeEach
     public void setUp() {
-        date = new Date(2021, 02, 14, 12, 45);
+        date = new Date(2021, 02, 14);
     }
 
     @Test
@@ -24,17 +24,13 @@ public class DateTest {
         assertEquals(2021, date.getYear());
         assertEquals(02, date.getMonth());
         assertEquals(14, date.getDay());
-        assertEquals(12, date.getHour());
-        assertEquals(45, date.getMinute());
+
     }
 
     @Test
     public void testReturnDate() {
         assertEquals("2021 / 02 / 14", date.returnDate());
     }
-
-    @Test
-    public void testReturnTime() {
-        assertEquals("12 : 45", date.returnTime());
-    }
 }
+
+
