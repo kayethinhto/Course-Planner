@@ -1,0 +1,38 @@
+{
+    "courses": [
+        {
+            "course": "CPSC210",
+            "tasks": [
+                {
+                    "month": 2,
+                    "year": 2021,
+                    "weight": 20,
+                    "task name": "ITE1",
+                    "day": 24
+                },
+                {
+                    "month": 4,
+                    "year": 2021,
+                    "weight": 30,
+                    "task name": "Final",
+                    "day": 22
+                }
+            ]
+        },
+        {
+            "course": "STAT200",
+            "tasks": [{
+                "month": 3,
+                "year": 2021,
+                "weight": 5,
+                "task name": "WebWork",
+                "day": 15
+            }]
+        },
+        {
+            "course": "CPSC221",
+            "tasks": []
+        }
+    ],
+    "name": "CoursePlanner"
+}

@@ -1,0 +1,25 @@
+{
+    "courses": [
+        {
+            "course": "CPSC210",
+            "tasks": [{
+                "month": 2,
+                "year": 2021,
+                "weight": 20,
+                "task name": "ITE1",
+                "day": 24
+            }]
+        },
+        {
+            "course": "CPSC221",
+            "tasks": [{
+                "month": 4,
+                "year": 2021,
+                "weight": 40,
+                "task name": "Final",
+                "day": 21
+            }]
+        }
+    ],
+    "name": "FullCoursePlannerTest"
+}
