@@ -107,6 +107,7 @@ public class CoursePlannerApp {
             }
         }
     }
+
     //EFFECTS: saves the coursePlanner to file
     public void save() {
         System.out.println("What do you want to name your Course Planner?");
@@ -136,7 +137,7 @@ public class CoursePlannerApp {
         try {
             JsonReader jsonReader = new JsonReader(fileDirectory);
             cp = jsonReader.read();
-            System.out.println("Loaded " + cp.getCoursePlannerName() + " from " + fileDirectory );
+            System.out.println("Loaded " + cp.getCoursePlannerName() + " from " + fileDirectory);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + fileDirectory);
         }
