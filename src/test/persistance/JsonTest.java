@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class JsonTest {
     public boolean checkTaskInJsonObj(String taskName, String courseName, CoursePlanner cp) {
-
         return cp.getCourseObj(courseName).getTaskNames().contains(taskName);
     }
 }
