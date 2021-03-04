@@ -97,6 +97,11 @@ public class CourseTest {
 
     @Test
     public void testGetTaskObjNull() {
+        c1.addTask("Midterm2",
+                new Date(2021, 03, 24), 20);
+        c1.addTask("Final",
+                new Date(2021, 04, 22), 40);
+
         assertEquals(null, c1.getTaskObj("STAT 200"));
     }
 
