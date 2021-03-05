@@ -14,39 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CourseTest {
     Course c1;
 
-    /*
-    Task t1;
-    Task t2;
-    Task t3;
-    ArrayList<Task> actual;
-     */
-
     @BeforeEach
     public void setUp() {
-        /*
-        c1 = new Course("CPSC 210");
-
-        t1 = new Task("Midterm",
-                new Date(2021, 02, 24), 20);
-        t2 = new Task("Midterm2",
-                new Date(2021, 03, 24), 20);
-        t3 = new Task("Exam",
-                new Date(2021, 03, 24), 40);
-
-        c1.addTask("Midterm",
-                new Date(2021, 02, 24), 20 );
-        c1.addTask("Midterm2",
-                new Date(2021, 03, 24), 20);
-        c1.addTask("Exam",
-                new Date(2021, 03, 24), 40);
-
-        this.actual = new ArrayList<>();
-
-        actual.add(t1);
-        actual.add(t2);
-        actual.add(t3);
-
-         */
 
         c1 = new Course("CPSC 210");
     }

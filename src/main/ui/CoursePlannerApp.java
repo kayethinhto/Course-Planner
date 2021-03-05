@@ -11,10 +11,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
-// This code is based on the sample repo provided
+// Some code is based on the sample repo provided
 // (https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo)
-//Represents the the ui for the Course Planner App
 
+//Represents the the ui for the Course Planner App
 public class CoursePlannerApp {
 
     private static final String jsonStoreBeginning = "./data/";
@@ -128,7 +128,8 @@ public class CoursePlannerApp {
         }
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: loads a CoursePlanner from file, specified by the user
     private void loadFile() {
         System.out.println("What is the name of the file you loaded?");
         String coursePlannerNameLoad = input.nextLine();
@@ -181,7 +182,6 @@ public class CoursePlannerApp {
     //         in a given course (also specified by the user). Course specified by user needs to exist.
     private void addTaskExisting() {
 
-        //TODO: move the object instantiation to the model classes
         System.out.println("What course would you like to add a task to? (choose from: " + cp.getCourses() + ")");
         String thisCourse = input.next();
         if (!(cp.getCourses().isEmpty()) && cp.getCourses().contains(thisCourse)) {
@@ -206,6 +206,7 @@ public class CoursePlannerApp {
         printInstructions();
     }
 
+    //EFFECTS: Asks for user input regarding information for a given task, returns Date
     private Date addTaskDate() {
         System.out.println("What year is this due? (____/mm/dd)");
         int taskDateYear = input.nextInt();
@@ -215,16 +216,7 @@ public class CoursePlannerApp {
 
         System.out.println("What day is this due? (yyyy/mm/__)");
         int taskDateDay = input.nextInt();
-        /*
-        System.out.println("What time (hour) is this due? (__:mm)");
-        int taskDateHour = input.nextInt();
 
-        System.out.println("What time (minute) is this due? (hh:__)");
-        int taskDateMin = input.nextInt();
-        Date thisDate = new Date(taskDateYear, taskDateMonth, taskDateDay);
-        return thisDate;
-         */
-        //TODO: method addDate()
         return addDate(taskDateYear, taskDateMonth, taskDateDay);
     }
 
