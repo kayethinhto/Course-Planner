@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-//represents a course in the course planner, each course can have specific assignments
+//Represents a course in the course planner, each course can have specific assignments
 public class Course implements Writable {
     private String courseName;
     private List<Task> tasks;
@@ -68,6 +68,7 @@ public class Course implements Writable {
         return json;
     }
 
+    //EFFECTS: returns tasks in this course as a JSON array
     private JSONArray tasksToJson() {
         JSONArray jsonArray = new JSONArray();
         for (Task task : tasks) {

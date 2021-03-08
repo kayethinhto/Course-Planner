@@ -9,6 +9,7 @@ import persistance.Writable;
 import java.util.ArrayList;
 import java.util.List;
 
+//Represents a Course Planner database that contains a list of courses
 public class CoursePlanner implements Writable {
     private List<Course> courses;
     private String coursePlannerName;

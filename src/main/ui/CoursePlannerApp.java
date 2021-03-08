@@ -269,7 +269,7 @@ public class CoursePlannerApp {
         String task = input.next();
         //add to model package
         if (checkCourseContainsTask(course, task)) {
-            //
+
             String date = cp.getCourseObj(course).getTaskObj(task).getTaskDueDate();
 
             String taskName = cp.getCourseObj(course).getTaskObj(task).getTaskName();
@@ -286,5 +286,4 @@ public class CoursePlannerApp {
         printInstructions();
     }
 
-    //TODO: saveToFile method that writes name of course planner
 }

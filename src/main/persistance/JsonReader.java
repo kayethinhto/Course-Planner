@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 // (https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo)
 
 //Represents a reader that reads a CoursePlanner from JSON data stored in file
-public class JsonReader { //TODO: add comments
+public class JsonReader {
     private String source;
 
     // EFFECTS: constructs reader to read from source file
