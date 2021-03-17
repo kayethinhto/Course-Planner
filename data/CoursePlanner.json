@@ -32,6 +32,10 @@
         {
             "course": "CPSC221",
             "tasks": []
+        },
+        {
+            "course": "MATH200",
+            "tasks": []
         }
     ],
     "name": "CoursePlanner"
