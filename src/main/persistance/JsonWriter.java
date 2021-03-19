@@ -11,7 +11,7 @@ import java.io.PrintWriter;
 // (https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo)
 
 //Represents a writer that writes to a given destination
-public class JsonWriter { //TODO: add comments
+public class JsonWriter {
     private static final int TAB = 4;
     private PrintWriter writer;
     private String destination;
