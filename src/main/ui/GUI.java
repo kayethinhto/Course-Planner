@@ -7,33 +7,41 @@ import model.Task;
 import persistance.JsonReader;
 import persistance.JsonWriter;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
 
 public class GUI extends JFrame {
     private JPanel panel;
+    private JPanel coursePanel;
     private Box mainBox;
     private CoursePlanner cp;
 
+    private String courseIconPath = "data/Course_Icon.png";
+    private String taskIconPath = "data/Task_Icon.jpeg";
+    private String openIconPath = "data/Open_Icon.jpeg";
+    private String saveIconPath = "data/Save_Icon.png";
 
+    //Constructor
     public GUI() {
         cp = new CoursePlanner();
         mainBox = Box.createHorizontalBox();
-        makeFrame();
         makePanel();
-        panel.setLayout(new BoxLayout(panel, 3));
+        makeFrame();
         makeButtons();
-
     }
 
     // MODIFIES: this
     // EFFECTS: initializes this JFrame with width 500, height 500
     private void makeFrame() {
-        setSize(500, 500);
+        setSize(350, 350);
         setLayout(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,10 +50,12 @@ public class GUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: creates a JPanel of width 500 and height 500 and adds it to this JFrame
+    // EFFECTS: creates a JPanel of width 350 and height 350 and adds it to this JFrame
     private void makePanel() {
         panel = new JPanel();
-        panel.setSize(500, 500);
+        panel.setSize(350, 350);
+        panel.setBorder(new EmptyBorder(new Insets(-150, 50, 150, 200)));
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         add(panel);
     }
 
@@ -60,11 +70,12 @@ public class GUI extends JFrame {
 
     }
 
+    //--------------------------- Buttons/General GUI -------------------------------
+
     // MODIFIES: this
     // EFFECTS: creates the "Add Course" button
     private void makeAddCourseButton() {
-        JButton newCourse = new JButton("Add Course");
-        newCourse.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton newCourse = new JButton("Add Course", createButtonIcon(courseIconPath));
         panel.add(newCourse);
 
         newCourse.addActionListener(new ActionListener() {
@@ -78,11 +89,12 @@ public class GUI extends JFrame {
             }
         });
         panel.add(newCourse);
-
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the "Add Task" button in each respective window
     private void makeAddTaskButton(Course c, JPanel panel) {
-        JButton newTask = new JButton("Add new task");
+        JButton newTask = new JButton("Add new task", createButtonIcon(taskIconPath));
         newTask.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(newTask);
 
@@ -144,13 +156,13 @@ public class GUI extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                JFrame secondFrame;
+                JFrame secondFrame = createSecondPanel(course);
                 if (course.getJframe() == null) {
-                    secondFrame = new JFrame("Tasks for " + course.getCourseName());
                     JPanel secondPanel = new JPanel();
                     secondPanel.setLayout(new BoxLayout(secondPanel, 3));
                     secondFrame.getContentPane().add(secondPanel);
+                    secondPanel.setSize(200, 200);
+                    secondFrame.setSize(200, 200);
 
                     course.setJframe(secondFrame);
 
@@ -163,7 +175,12 @@ public class GUI extends JFrame {
                 panel.repaint();
             }
         });
+    }
 
+    //EFFECTS: creates a second window for each new course button
+    private JFrame createSecondPanel(Course course) {
+        JFrame secondFrame = new JFrame("Tasks for " + course.getCourseName());
+        return secondFrame;
     }
 
     // EFFECTS: prompts user for input. If user enters null or "Empty" (the default message) return null. Otherwise,
@@ -190,11 +207,12 @@ public class GUI extends JFrame {
         }
     }
 
+    //--------------------------- Save/Open Features -------------------------------
+
     // MODIFIES: this
     // EFFECTS: creates the "Save" button
     private void makeSaveButton() {
-        JButton save = new JButton("Save");
-        save.setAlignmentX(Component.CENTER_ALIGNMENT);
+        JButton save = new JButton("Save", createButtonIcon(saveIconPath));
         panel.add(save);
 
         save.addActionListener(new ActionListener() {
@@ -233,17 +251,16 @@ public class GUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: creates the "Open" button
     private void makeOpenButton() {
-        JButton save = new JButton("Open");
-        save.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(save);
+        JButton open = new JButton("Open",createButtonIcon(openIconPath));
+        panel.add(open);
 
-        save.addActionListener(new ActionListener() {
+        open.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 openFile();
             }
         });
-        panel.add(save);
+        panel.add(open);
     }
 
     // EFFECTS: user inputs name of the file, and opens the JSON file
@@ -271,10 +288,12 @@ public class GUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: Re-creates the buttons for each course and task in the current list. Adds buttons to this JFrame
     private void remakeButtons() {
         for (Course course : cp.getCourseList()) {
             addCourseButton(course);
-            for (Task task: course.getTaskList()) {
+            for (Task task : course.getTaskList()) {
                 JFrame secondFrame = new JFrame("Tasks for " + course.getCourseName());
                 JPanel secondPanel = new JPanel();
                 secondPanel.setLayout(new BoxLayout(secondPanel, 3));
@@ -282,10 +301,29 @@ public class GUI extends JFrame {
 
                 course.setJframe(secondFrame);
                 makeAddTaskButton(course, secondPanel);
-                addTaskButton(course,task.getTaskName(),secondPanel);
+                addTaskButton(course, task.getTaskName(), secondPanel);
+                panel.revalidate();
+                panel.repaint();
             }
         }
     }
+
+    //--------------------------- Additional Feature (Displaying images)  -------------------------------
+
+    //EFFECTS: creates an Icon for the specified button
+    private Icon createButtonIcon(String path) {
+        BufferedImage categoryImage = null;
+        try {
+            categoryImage = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Cant find image file", "Status", JOptionPane.ERROR_MESSAGE);
+        }
+        Icon icon = new ImageIcon((Image) categoryImage.getScaledInstance(
+                20, 20, Image.SCALE_DEFAULT));
+        return icon;
+    }
+
 
     public static void main(String[] args) {
         new GUI();
