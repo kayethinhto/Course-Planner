@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +83,14 @@ public class CourseTest {
                 new Date(2021, 03, 24), 40);
 
         assertEquals("Midterm", c1.getTaskObj("Midterm").getTaskName());
+    }
+
+    @Test
+    public void testGetAndSetJFrame() {
+        JFrame jframe = new JFrame();
+        assertNull(c1.getJframe());
+        c1.setJframe(jframe);
+        assertEquals(c1.getJframe(), jframe);
     }
 
 }
