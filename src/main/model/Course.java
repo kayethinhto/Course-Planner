@@ -30,6 +30,8 @@ public class Course implements Writable {
         jframe = j;
     }
 
+    // MODIFIES: this
+    //EFFECTS: returns the JFrame
     public JFrame getJframe() {
         return jframe;
     }

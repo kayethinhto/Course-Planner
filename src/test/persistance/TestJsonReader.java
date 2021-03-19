@@ -41,7 +41,7 @@ public class TestJsonReader extends JsonTest {
             CoursePlanner cp = reader.read();
             assertEquals("CoursePlanner", cp.getCoursePlannerName());
             List<String> courseList = cp.getCourses();
-            assertEquals(3, courseList.size());
+            assertEquals(4, courseList.size());
 
             //check courses
             assertEquals("CPSC210", courseList.get(0));

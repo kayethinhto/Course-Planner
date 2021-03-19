@@ -6,12 +6,15 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import javax.swing.*;
 import java.util.ArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 public class CoursePlannerTest {
@@ -60,4 +63,12 @@ public class CoursePlannerTest {
         assertEquals(null, cp.getCourseObj("STAT 200"));
     }
 
+    @Test
+    public void testJFrame() {
+        JFrame j = new JFrame();
+        assertNull(c1.getJframe());
+        c1.setJframe(j);
+        assertEquals(c1.getJframe(), j);
+
+    }
 }
