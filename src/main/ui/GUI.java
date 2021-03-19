@@ -4,11 +4,15 @@ import model.Course;
 import model.CoursePlanner;
 import model.Date;
 import model.Task;
+import persistance.JsonReader;
+import persistance.JsonWriter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.InvalidPathException;
 
 public class GUI extends JFrame {
     private JPanel panel;
@@ -49,6 +53,8 @@ public class GUI extends JFrame {
     // EFFECTS: makes buttons for this JFrame
     private void makeButtons() {
         makeAddCourseButton();
+        makeSaveButton();
+        makeOpenButton();
         panel.revalidate();
         panel.repaint();
 
@@ -184,6 +190,102 @@ public class GUI extends JFrame {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the "Save" button
+    private void makeSaveButton() {
+        JButton save = new JButton("Save");
+        save.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(save);
+
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveFile();
+            }
+        });
+        panel.add(save);
+    }
+
+    // EFFECTS: user inputs name of the file, and saves data as a JSON file
+    private void saveFile() {
+        String fileName = getInputString("Enter the name of the file");
+        try {
+            if (fileName == null) {
+                throw new NullPointerException();
+            }
+            if (cp.getCoursePlannerName() == null) {
+                String cpName = getInputString("Enter the name of your Course Planner");
+                cp.setCoursePlannerName(cpName);
+            }
+            String fileLocation = "./data/" + fileName + ".json";
+            JsonWriter writer = new JsonWriter(fileLocation);
+            writer.open();
+            writer.write(cp);
+            writer.close();
+            JOptionPane.showMessageDialog(panel, "Successfully saved!");
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(panel, "Invalid file name", "Status", JOptionPane.ERROR_MESSAGE);
+        } catch (NullPointerException e) {
+            // pass it has already been handled
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates the "Open" button
+    private void makeOpenButton() {
+        JButton save = new JButton("Open");
+        save.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(save);
+
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openFile();
+            }
+        });
+        panel.add(save);
+    }
+
+    // EFFECTS: user inputs name of the file, and opens the JSON file
+    private void openFile() {
+        String fileName = getInputString("Enter the name of the file you want to open (without the extension)");
+        try {
+            if (fileName == null) {
+                throw new IOException();
+            }
+            fileName = "./data/" + fileName + ".json";
+            JsonReader reader = new JsonReader(fileName);
+            cp = reader.read();
+            remakeButtons();
+            JOptionPane.showMessageDialog(this,
+                    "Opened " + cp.getCoursePlannerName() + " successfully!");
+            panel.revalidate();
+            panel.repaint();
+
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Could not find file!", "Status", JOptionPane.ERROR_MESSAGE);
+        } catch (InvalidPathException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Invalid name!", "Status", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void remakeButtons() {
+        for (Course course : cp.getCourseList()) {
+            addCourseButton(course);
+            for (Task task: course.getTaskList()) {
+                JFrame secondFrame = new JFrame("Tasks for " + course.getCourseName());
+                JPanel secondPanel = new JPanel();
+                secondPanel.setLayout(new BoxLayout(secondPanel, 3));
+                secondFrame.getContentPane().add(secondPanel);
+
+                course.setJframe(secondFrame);
+                makeAddTaskButton(course, secondPanel);
+                addTaskButton(course,task.getTaskName(),secondPanel);
+            }
+        }
+    }
 
     public static void main(String[] args) {
         new GUI();

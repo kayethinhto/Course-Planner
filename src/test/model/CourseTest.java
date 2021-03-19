@@ -93,4 +93,17 @@ public class CourseTest {
         assertEquals(c1.getJframe(), jframe);
     }
 
+    @Test
+    public void testGetTaskList() {
+        List<Task> tasks = new ArrayList<>();
+        Task t1 = new Task("Midterm2",
+                new Date(2021, 03, 24), 20);
+        tasks.add(t1);
+        c1.addTask("Midterm2",
+                new Date(2021, 03, 24), 20);
+
+        assertEquals(c1.getTaskList().get(0).getTaskName(), tasks.get(0).getTaskName());
+    }
+
+
 }

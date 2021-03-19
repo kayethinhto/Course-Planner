@@ -24,13 +24,13 @@ public class Course implements Writable {
         jframe = null;
     }
 
-    // MODIFIES: this
+    //MODIFIES: this
     //EFFECTS: assigns a course a specific JFrame
     public void setJframe(JFrame j) {
         jframe = j;
     }
 
-    // MODIFIES: this
+    //MODIFIES: this
     //EFFECTS: returns the JFrame
     public JFrame getJframe() {
         return jframe;
@@ -52,6 +52,10 @@ public class Course implements Writable {
             taskList.add(t.getTaskName());
         }
         return taskList;
+    }
+
+    public List<Task> getTaskList() {
+        return tasks;
     }
 
     //EFFECTS: returns the course name

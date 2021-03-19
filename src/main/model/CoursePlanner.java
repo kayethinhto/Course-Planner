@@ -25,6 +25,10 @@ public class CoursePlanner implements Writable {
         courses.add(c);
     }
 
+    public List<Course> getCourseList() {
+        return courses;
+    }
+
     //REQUIRES: list of courses > 0
     //EFFECTS: returns a list of all the course names in the course planner
     public List<String> getCourses() {

@@ -71,4 +71,14 @@ public class CoursePlannerTest {
         assertEquals(c1.getJframe(), j);
 
     }
+
+    @Test
+    public void testGetCourseList() {
+        List<Course> courses = new ArrayList<>();
+        courses.add(c1);
+        courses.add(c2);
+        courses.add(c3);
+
+        assertEquals(cp.getCourseList(), courses);
+    }
 }
