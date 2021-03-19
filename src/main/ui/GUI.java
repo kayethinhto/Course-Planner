@@ -29,11 +29,10 @@ public class GUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: initializes this JFrame with width 500, height 500
     private void makeFrame() {
-        setSize(500,500);
+        setSize(500, 500);
         setLayout(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 
 
     }
@@ -58,7 +57,7 @@ public class GUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: creates the "Add Course" button
     private void makeAddCourseButton() {
-        JButton  newCourse = new JButton("Add Course");
+        JButton newCourse = new JButton("Add Course");
         newCourse.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(newCourse);
 
@@ -75,8 +74,9 @@ public class GUI extends JFrame {
         panel.add(newCourse);
 
     }
+
     private void makeAddTaskButton(Course c, JPanel panel) {
-        JButton  newTask = new JButton("Add new task");
+        JButton newTask = new JButton("Add new task");
         newTask.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(newTask);
 
@@ -92,7 +92,7 @@ public class GUI extends JFrame {
                 Date taskDate = new Date(year, month, day);
 
                 int taskWeight = getInputInt("Enter weight");
-                c.addTask(taskName,taskDate, taskWeight);
+                c.addTask(taskName, taskDate, taskWeight);
 
                 addTaskButton(c, taskName, panel);
                 panel.revalidate();
@@ -188,9 +188,6 @@ public class GUI extends JFrame {
     public static void main(String[] args) {
         new GUI();
     }
-
-
-
 
 
 }
