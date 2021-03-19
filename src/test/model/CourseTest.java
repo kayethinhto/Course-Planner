@@ -87,8 +87,9 @@ public class CourseTest {
 
     @Test
     public void testGetAndSetJFrame() {
-        JFrame jframe = new JFrame();
-        assertNull(c1.getJframe());
+        JFrame jframe = new JFrame("new frame");
+        JFrame j = c1.getJframe();
+        assertEquals(j, null);
         c1.setJframe(jframe);
         assertEquals(c1.getJframe(), jframe);
     }
