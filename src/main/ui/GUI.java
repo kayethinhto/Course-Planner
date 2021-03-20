@@ -34,6 +34,7 @@ public class GUI extends JFrame {
         cp = new CoursePlanner();
         mainBox = Box.createHorizontalBox();
         makePanel();
+        makeCoursePanel();
         makeFrame();
         makeButtons();
     }
@@ -46,6 +47,13 @@ public class GUI extends JFrame {
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        JSplitPane splitPane = new JSplitPane();
+        getContentPane().setLayout(new GridLayout());
+        getContentPane().add(splitPane);
+        splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        splitPane.setDividerLocation(5);
+        splitPane.setTopComponent(panel);
+        splitPane.setBottomComponent(coursePanel);
 
     }
 
@@ -53,10 +61,19 @@ public class GUI extends JFrame {
     // EFFECTS: creates a JPanel of width 350 and height 350 and adds it to this JFrame
     private void makePanel() {
         panel = new JPanel();
-        panel.setSize(350, 350);
-        panel.setBorder(new EmptyBorder(new Insets(-150, 50, 150, 200)));
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setSize(350,350);
+     //   panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         add(panel);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: creates a JPanel of width 350 and height 350 and adds it to this JFrame
+    private void makeCoursePanel() { //TODO: fix box layout
+        coursePanel = new JPanel();
+        coursePanel.setSize(350, 350);
+      //  coursePanel.setBorder(new EmptyBorder(new Insets(300, -200, 150, 200)));
+       // coursePanel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        add(coursePanel);
     }
 
     // MODIFIES: this
@@ -65,9 +82,14 @@ public class GUI extends JFrame {
         makeAddCourseButton();
         makeSaveButton();
         makeOpenButton();
+        update();
+    }
+
+    private void update() {
         panel.revalidate();
         panel.repaint();
-
+        coursePanel.revalidate();
+        coursePanel.repaint();
     }
 
     //--------------------------- Buttons/General GUI -------------------------------
@@ -76,7 +98,10 @@ public class GUI extends JFrame {
     // EFFECTS: creates the "Add Course" button
     private void makeAddCourseButton() {
         JButton newCourse = new JButton("Add Course", createButtonIcon(courseIconPath));
+        newCourse.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(newCourse);
+        panel.revalidate();
+        panel.repaint();
 
         newCourse.addActionListener(new ActionListener() {
             @Override
@@ -89,6 +114,7 @@ public class GUI extends JFrame {
             }
         });
         panel.add(newCourse);
+        update();
     }
 
     // MODIFIES: this
@@ -118,6 +144,7 @@ public class GUI extends JFrame {
             }
         });
         panel.add(newTask);
+        update();
 
     }
 
@@ -144,6 +171,7 @@ public class GUI extends JFrame {
                 panel.repaint();
             }
         });
+        update();
     }
 
     // MODIFIES: this
@@ -151,8 +179,7 @@ public class GUI extends JFrame {
     private void addCourseButton(Course course) {
         JButton button = new JButton(course.getCourseName());
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panel.add(button);
-
+        coursePanel.add(button);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -171,10 +198,10 @@ public class GUI extends JFrame {
                     secondFrame = course.getJframe();
                 }
                 secondFrame.setVisible(true);
-                panel.revalidate();
-                panel.repaint();
+                update();
             }
         });
+        update();
     }
 
     //EFFECTS: creates a second window for each new course button
@@ -213,6 +240,8 @@ public class GUI extends JFrame {
     // EFFECTS: creates the "Save" button
     private void makeSaveButton() {
         JButton save = new JButton("Save", createButtonIcon(saveIconPath));
+        save.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         panel.add(save);
 
         save.addActionListener(new ActionListener() {
@@ -222,6 +251,7 @@ public class GUI extends JFrame {
             }
         });
         panel.add(save);
+        update();
     }
 
     // EFFECTS: user inputs name of the file, and saves data as a JSON file
@@ -252,6 +282,8 @@ public class GUI extends JFrame {
     // EFFECTS: creates the "Open" button
     private void makeOpenButton() {
         JButton open = new JButton("Open",createButtonIcon(openIconPath));
+        open.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         panel.add(open);
 
         open.addActionListener(new ActionListener() {
@@ -261,6 +293,7 @@ public class GUI extends JFrame {
             }
         });
         panel.add(open);
+        update();
     }
 
     // EFFECTS: user inputs name of the file, and opens the JSON file
