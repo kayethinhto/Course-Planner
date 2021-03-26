@@ -1,0 +1,38 @@
+{
+    "courses": [
+        {
+            "course": "STAT200",
+            "tasks": [{
+                "month": 20,
+                "year": 2021,
+                "weight": 40,
+                "task name": "Assignment1",
+                "day": 30
+            }]
+        },
+        {
+            "course": "CPSC210",
+            "tasks": [
+                {
+                    "month": 2,
+                    "year": 2021,
+                    "weight": 20,
+                    "task name": "Midterm",
+                    "day": 24
+                },
+                {
+                    "month": 20,
+                    "year": 2020,
+                    "weight": 20,
+                    "task name": "Final",
+                    "day": 20
+                }
+            ]
+        },
+        {
+            "course": "BIOL110",
+            "tasks": []
+        }
+    ],
+    "name": "CoursePlanner"
+}

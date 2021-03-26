@@ -1,0 +1,38 @@
+{
+    "courses": [
+        {
+            "course": "CPSC210",
+            "tasks": [
+                {
+                    "month": 20,
+                    "year": 20,
+                    "weight": 20,
+                    "task name": "Midterm",
+                    "day": 20
+                },
+                {
+                    "month": 3,
+                    "year": 2,
+                    "weight": 5,
+                    "task name": "final",
+                    "day": 4
+                }
+            ]
+        },
+        {
+            "course": "STAT200",
+            "tasks": [{
+                "month": 20,
+                "year": 2021,
+                "weight": 20,
+                "task name": "Assignment 1",
+                "day": 20
+            }]
+        },
+        {
+            "course": "MATH100",
+            "tasks": []
+        }
+    ],
+    "name": "CoursePlanner"
+}
