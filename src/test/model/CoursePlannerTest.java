@@ -63,14 +63,6 @@ public class CoursePlannerTest {
         assertEquals(null, cp.getCourseObj("STAT 200"));
     }
 
-    @Test
-    public void testJFrame() {
-        JFrame j = new JFrame();
-        assertNull(c1.getJframe());
-        c1.setJframe(j);
-        assertEquals(c1.getJframe(), j);
-
-    }
 
     @Test
     public void testGetCourseList() {

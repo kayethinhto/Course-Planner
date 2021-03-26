@@ -17,26 +17,33 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.InvalidPathException;
+import java.util.HashMap;
 
 public class GUI extends JFrame {
     private JPanel panel;
     private JPanel coursePanel;
     private Box mainBox;
     private CoursePlanner cp;
+    HashMap<Course,JFrame> courseJFrames;
 
     private String courseIconPath = "data/Course_Icon.png";
     private String taskIconPath = "data/Task_Icon.jpeg";
     private String openIconPath = "data/Open_Icon.jpeg";
     private String saveIconPath = "data/Save_Icon.png";
 
+
+    //--------------------------- Set up -------------------------------
+    
     //Constructor
     public GUI() {
         cp = new CoursePlanner();
         mainBox = Box.createHorizontalBox();
+        courseJFrames = new HashMap<>();
         makePanel();
         makeCoursePanel();
         makeFrame();
         makeButtons();
+
     }
 
     // MODIFIES: this
@@ -54,6 +61,7 @@ public class GUI extends JFrame {
         splitPane.setDividerLocation(5);
         splitPane.setTopComponent(panel);
         splitPane.setBottomComponent(coursePanel);
+        update();
 
     }
 
@@ -74,6 +82,7 @@ public class GUI extends JFrame {
       //  coursePanel.setBorder(new EmptyBorder(new Insets(300, -200, 150, 200)));
        // coursePanel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         add(coursePanel);
+        update();
     }
 
     // MODIFIES: this
@@ -100,8 +109,7 @@ public class GUI extends JFrame {
         JButton newCourse = new JButton("Add Course", createButtonIcon(courseIconPath));
         newCourse.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(newCourse);
-        panel.revalidate();
-        panel.repaint();
+        update();
 
         newCourse.addActionListener(new ActionListener() {
             @Override
@@ -174,8 +182,6 @@ public class GUI extends JFrame {
         update();
     }
 
-    // MODIFIES: this
-    // EFFECTS: Creates a specific button for a course
     private void addCourseButton(Course course) {
         JButton button = new JButton(course.getCourseName());
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -184,18 +190,19 @@ public class GUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame secondFrame = createSecondPanel(course);
-                if (course.getJframe() == null) {
+                if (!courseJFrames.containsKey(course)) {
                     JPanel secondPanel = new JPanel();
                     secondPanel.setLayout(new BoxLayout(secondPanel, 3));
                     secondFrame.getContentPane().add(secondPanel);
                     secondPanel.setSize(200, 200);
                     secondFrame.setSize(200, 200);
 
-                    course.setJframe(secondFrame);
+                    //course.setJframe(secondFrame);
+                    courseJFrames.put(course, secondFrame);
 
                     makeAddTaskButton(course, secondPanel);
                 } else {
-                    secondFrame = course.getJframe();
+                    secondFrame = courseJFrames.get(course);
                 }
                 secondFrame.setVisible(true);
                 update();
@@ -331,8 +338,8 @@ public class GUI extends JFrame {
                 JPanel secondPanel = new JPanel();
                 secondPanel.setLayout(new BoxLayout(secondPanel, 3));
                 secondFrame.getContentPane().add(secondPanel);
-
-                course.setJframe(secondFrame);
+                secondPanel.setSize(200, 200);
+                secondFrame.setSize(200, 200);
                 makeAddTaskButton(course, secondPanel);
                 addTaskButton(course, task.getTaskName(), secondPanel);
                 panel.revalidate();
@@ -356,7 +363,6 @@ public class GUI extends JFrame {
                 20, 20, Image.SCALE_DEFAULT));
         return icon;
     }
-
 
     public static void main(String[] args) {
         new GUI();

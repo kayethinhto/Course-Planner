@@ -85,14 +85,6 @@ public class CourseTest {
         assertEquals("Midterm", c1.getTaskObj("Midterm").getTaskName());
     }
 
-    @Test
-    public void testGetAndSetJFrame() {
-        JFrame jframe = new JFrame("new frame");
-        JFrame j = c1.getJframe();
-        assertEquals(j, null);
-        c1.setJframe(jframe);
-        assertEquals(c1.getJframe(), jframe);
-    }
 
     @Test
     public void testGetTaskList() {

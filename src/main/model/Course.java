@@ -1,13 +1,10 @@
 package model;
 
-import com.sun.corba.se.spi.ior.Writeable;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.omg.CORBA_2_3.portable.OutputStream;
 import persistance.Writable;
 
 import javax.swing.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,25 +12,11 @@ import java.util.List;
 public class Course implements Writable {
     private String courseName;
     private List<Task> tasks;
-    private JFrame jframe;
 
     //Constructor
     public Course(String courseName) {
         this.courseName = courseName;
         tasks = new ArrayList<>();
-        jframe = null;
-    }
-
-    //MODIFIES: this
-    //EFFECTS: assigns a course a specific JFrame
-    public void setJframe(JFrame j) {
-        jframe = j;
-    }
-
-    //MODIFIES: this
-    //EFFECTS: returns the JFrame
-    public JFrame getJframe() {
-        return jframe;
     }
 
     //MODIFIES: this
