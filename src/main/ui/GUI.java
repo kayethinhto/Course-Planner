@@ -24,7 +24,8 @@ public class GUI extends JFrame {
     private JPanel coursePanel;
     private Box mainBox;
     private CoursePlanner cp;
-    HashMap<Course,JFrame> courseJFrames;
+    HashMap<Course, JFrame> courseJFrames;
+    HashMap<Course, JPanel> courseJPanels;
 
     private String courseIconPath = "data/Course_Icon.png";
     private String taskIconPath = "data/Task_Icon.jpeg";
@@ -33,12 +34,13 @@ public class GUI extends JFrame {
 
 
     //--------------------------- Set up -------------------------------
-    
+
     //Constructor
     public GUI() {
         cp = new CoursePlanner();
         mainBox = Box.createHorizontalBox();
         courseJFrames = new HashMap<>();
+        courseJPanels = new HashMap<>();
         makePanel();
         makeCoursePanel();
         makeFrame();
@@ -69,8 +71,7 @@ public class GUI extends JFrame {
     // EFFECTS: creates a JPanel of width 350 and height 350 and adds it to this JFrame
     private void makePanel() {
         panel = new JPanel();
-        panel.setSize(350,350);
-     //   panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.setSize(350, 350);
         add(panel);
     }
 
@@ -79,8 +80,6 @@ public class GUI extends JFrame {
     private void makeCoursePanel() { //TODO: fix box layout
         coursePanel = new JPanel();
         coursePanel.setSize(350, 350);
-      //  coursePanel.setBorder(new EmptyBorder(new Insets(300, -200, 150, 200)));
-       // coursePanel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         add(coursePanel);
         update();
     }
@@ -179,9 +178,12 @@ public class GUI extends JFrame {
                 panel.repaint();
             }
         });
+        panel.add(taskButton);
         update();
     }
 
+    // MODIFIES: this
+    // EFFECTS: creates the add course button
     private void addCourseButton(Course course) {
         JButton button = new JButton(course.getCourseName());
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -197,7 +199,6 @@ public class GUI extends JFrame {
                     secondPanel.setSize(200, 200);
                     secondFrame.setSize(200, 200);
 
-                    //course.setJframe(secondFrame);
                     courseJFrames.put(course, secondFrame);
 
                     makeAddTaskButton(course, secondPanel);
@@ -288,7 +289,7 @@ public class GUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: creates the "Open" button
     private void makeOpenButton() {
-        JButton open = new JButton("Open",createButtonIcon(openIconPath));
+        JButton open = new JButton("Open", createButtonIcon(openIconPath));
         open.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panel.add(open);
@@ -333,20 +334,36 @@ public class GUI extends JFrame {
     private void remakeButtons() {
         for (Course course : cp.getCourseList()) {
             addCourseButton(course);
+            remakeCourseButton(course);
+            makeAddTaskButton(course, courseJPanels.get(course));
+
             for (Task task : course.getTaskList()) {
-                JFrame secondFrame = new JFrame("Tasks for " + course.getCourseName());
-                JPanel secondPanel = new JPanel();
-                secondPanel.setLayout(new BoxLayout(secondPanel, 3));
-                secondFrame.getContentPane().add(secondPanel);
-                secondPanel.setSize(200, 200);
-                secondFrame.setSize(200, 200);
-                makeAddTaskButton(course, secondPanel);
-                addTaskButton(course, task.getTaskName(), secondPanel);
-                panel.revalidate();
-                panel.repaint();
+                addTaskButton(course, task.getTaskName(), courseJPanels.get(course));
+                update();
             }
         }
     }
+
+    // MODIFIES: this
+    // EFFECTS: Creates the add course button as well as remakes all existing courses and their tabs
+    private void remakeCourseButton(Course course) {
+        JFrame secondFrame = createSecondPanel(course);
+        if (!courseJFrames.containsKey(course)) {
+            JPanel secondPanel = new JPanel();
+            secondPanel.setLayout(new BoxLayout(secondPanel, 3));
+            secondFrame.getContentPane().add(secondPanel);
+            secondPanel.setSize(200, 200);
+            secondFrame.setSize(200, 200);
+
+            courseJFrames.put(course, secondFrame);
+            courseJPanels.put(course, secondPanel);
+        } else {
+            secondFrame = courseJFrames.get(course);
+        }
+        secondFrame.setVisible(true);
+        update();
+    }
+
 
     //--------------------------- Additional Feature (Displaying images)  -------------------------------
 
