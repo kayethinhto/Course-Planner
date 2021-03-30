@@ -24,3 +24,4 @@ the term.
 - As a user, I want to be able to retrieve specific information for each task
 - As a user, I want to be able to save my course planner file 
 - As a user, I want to be able to load an existing course planner from file
+- Phase 4: Task 2 - Utilized the Map interface in the GUI class. 
