@@ -24,4 +24,12 @@ the term.
 - As a user, I want to be able to retrieve specific information for each task
 - As a user, I want to be able to save my course planner file 
 - As a user, I want to be able to load an existing course planner from file
-- Phase 4: Task 2 - Utilized the Map interface in the GUI class. 
+
+## Phase 4: Task 2 
+- Utilized the Map interface in the GUI class. 
+
+## Phase 4: Task 3
+If I were given more time to work on the architecture of this project, I would use the Observer pattern to reduce 
+coupling between the CoursePlanner GUI, Course and Tasks. The GUI would be used as the observable and the Course and
+Task as the observers. 
+
