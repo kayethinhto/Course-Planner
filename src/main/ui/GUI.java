@@ -9,7 +9,6 @@ import persistance.JsonWriter;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +18,7 @@ import java.io.IOException;
 import java.nio.file.InvalidPathException;
 import java.util.HashMap;
 
+// Represents the GUI for the CoursePlanner
 public class GUI extends JFrame {
     private JPanel panel;
     private JPanel coursePanel;
@@ -77,7 +77,7 @@ public class GUI extends JFrame {
 
     // MODIFIES: this
     // EFFECTS: creates a JPanel of width 350 and height 350 and adds it to this JFrame
-    private void makeCoursePanel() { //TODO: fix box layout
+    private void makeCoursePanel() {
         coursePanel = new JPanel();
         coursePanel.setSize(350, 350);
         add(coursePanel);
@@ -93,6 +93,7 @@ public class GUI extends JFrame {
         update();
     }
 
+    // EFFECTS: automatically refreshes JPanels to display any changes made
     private void update() {
         panel.revalidate();
         panel.repaint();
@@ -314,7 +315,9 @@ public class GUI extends JFrame {
             fileName = "./data/" + fileName + ".json";
             JsonReader reader = new JsonReader(fileName);
             cp = reader.read();
+            //recreates the data into buttons
             remakeButtons();
+
             JOptionPane.showMessageDialog(this,
                     "Opened " + cp.getCoursePlannerName() + " successfully!");
             panel.revalidate();
@@ -330,7 +333,7 @@ public class GUI extends JFrame {
     }
 
     // MODIFIES: this
-    // EFFECTS: Re-creates the buttons for each course and task in the current list. Adds buttons to this JFrame
+    // EFFECTS: Recreates the buttons for each course and task in the current list. Adds buttons to this JFrame
     private void remakeButtons() {
         for (Course course : cp.getCourseList()) {
             addCourseButton(course);
@@ -365,7 +368,7 @@ public class GUI extends JFrame {
     }
 
 
-    //--------------------------- Additional Feature (Displaying images)  -------------------------------
+    //--------------------------- Additional Feature (Displaying image icons)  -------------------------------
 
     //EFFECTS: creates an Icon for the specified button
     private Icon createButtonIcon(String path) {
@@ -384,6 +387,5 @@ public class GUI extends JFrame {
     public static void main(String[] args) {
         new GUI();
     }
-
 
 }
