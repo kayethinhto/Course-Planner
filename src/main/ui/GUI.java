@@ -32,7 +32,6 @@ public class GUI extends JFrame {
     private String openIconPath = "data/Open_Icon.jpeg";
     private String saveIconPath = "data/Save_Icon.png";
 
-
     //--------------------------- Set up -------------------------------
 
     //Constructor
@@ -64,7 +63,6 @@ public class GUI extends JFrame {
         splitPane.setTopComponent(panel);
         splitPane.setBottomComponent(coursePanel);
         update();
-
     }
 
     // MODIFIES: this
@@ -366,7 +364,6 @@ public class GUI extends JFrame {
         secondFrame.setVisible(true);
         update();
     }
-
 
     //--------------------------- Additional Feature (Displaying image icons)  -------------------------------
 
