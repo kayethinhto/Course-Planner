@@ -1,6 +1,6 @@
 # Course Planner
 
-## CPSC 210 Term Project
+## Term Project
 
 
 
